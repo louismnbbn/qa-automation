@@ -1,0 +1,57 @@
+QA DATA VALIDATION REPORT — Telco Billing Reconciliation
+======================================================================
+
+[TC-01] Verify all usage records have a corresponding invoice
+Status          : FAILED
+Baris Bermasalah: 5
+Referensi Defect: DEF-01 (dan terkait DEF-02, DEF-03)
+Kolom           : ['customer_id']
+Contoh Data     :
+    (7,)
+    (22,)
+    (35,)
+    (None,)
+    (9999,)
+----------------------------------------------------------------------
+
+[TC-02] Verify no mandatory field (customer_id) is null
+Status          : FAILED
+Baris Bermasalah: 1
+Referensi Defect: DEF-02
+Kolom           : ['usage_id', 'customer_id', 'usage_date', 'data_mb', 'call_minutes']
+Contoh Data     :
+    (209, None, '2026-07-10', 800.0, 20.0)
+----------------------------------------------------------------------
+
+[TC-03] Verify referential integrity between usage_records and customers
+Status          : FAILED
+Baris Bermasalah: 1
+Referensi Defect: DEF-03
+Kolom           : ['customer_id']
+Contoh Data     :
+    (9999,)
+----------------------------------------------------------------------
+
+[TC-04] Verify no duplicate usage records
+Status          : FAILED
+Baris Bermasalah: 1
+Referensi Defect: DEF-04
+Kolom           : ['customer_id', 'usage_date', 'data_mb', 'call_minutes', 'jumlah_duplikat']
+Contoh Data     :
+    (3, '2026-07-15', 1200.0, 45.0, 2)
+----------------------------------------------------------------------
+
+[TC-05] Verify invoice amount matches usage calculation
+Status          : FAILED
+Baris Bermasalah: 3
+Referensi Defect: DEF-05
+Kolom           : ['customer_id', 'total_amount', 'amount_seharusnya', 'selisih']
+Contoh Data     :
+    (3, 1207125.5, 1224341.5, -17216.0)
+    (15, 1258741.5, 1266433.5, -7692.0)
+    (40, 1088397.0, 1104149.0, -15752.0)
+----------------------------------------------------------------------
+
+TOTAL TEST CASE : 5
+PASSED          : 0
+FAILED          : 5
