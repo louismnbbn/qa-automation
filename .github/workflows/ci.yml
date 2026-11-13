@@ -17,8 +17,9 @@ jobs:
           python-version: "3.12"
       - name: Generate data and run validation
         run: |
+          rm -f telco_billing.db
           python generate_data.py
-          python run_validation.py || true   # dataset sengaja rusak, jadi FAIL itu wajar
+          python run_validation.py || true
       - uses: actions/upload-artifact@v4
         with:
           name: validation-report
