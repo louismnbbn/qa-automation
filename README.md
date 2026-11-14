@@ -90,3 +90,15 @@ pip-audit
 - **GitHub Actions**: CI/CD
 - **Bandit, pip-audit, Gitleaks**: SAST, SCA, and secrets scanning
 - **DB Browser for SQLite**: manual data inspection during development
+
+## Helper Script
+
+| Script | Purpose |
+|---|---|
+| `scripts/check_sensitive_files.sh` | Detects tracked `.env`, `.db`, `.pem`, and `.key` files. Exits with code 1 if any are found. |
+
+Run it from the repository root:
+
+    bash scripts/check_sensitive_files.sh
+
+Tested on Ubuntu (VirtualBox): returns `[OK]` on a clean repo and a `[WARNING]` with exit code 1 when a `.env` file is tracked.
